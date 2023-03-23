@@ -10,8 +10,8 @@ devel
 build
 .vscode
 src/csv/
-src/msg/
-src/proto/
-src/raw_rosbag/
+src/csv2rosbag/msg/
+src/csv2rosbag/proto/
+src/csv2rosbag/raw_rosbag/
 src/rosbag/
-src/trans_proto/
+src/csv2rosbag/trans_proto/

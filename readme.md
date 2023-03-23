@@ -22,18 +22,18 @@ Unpack the ROSBAG package, serialize the data in it using protobuf, and then rep
     ```bash
     roscore
     ```
-2. 将原始的rosbag包放在`src/raw_rosbag`目录下，运行
+2. 将原始的rosbag包放在`src/csv2rosbag/raw_rosbag`目录下，运行
     ```bash
     rostopic echo -b <BAGFILE> -p <TOPIC> > <output>.csv
     ```
-   将会在`src/raw_rosbag`目录下生成对应的csv文件。其中rosbag中存在的topic可以使用下面的命令查看
+   将会在`src/csv2rosbag/raw_rosbag`目录下生成对应的csv文件。其中rosbag中存在的topic可以使用下面的命令查看
     ```bash
     rosbag info <BAGFILE>
     ```
    如需要转换多条topic，需要多次运行上述命令。
 3. 人工查看proto文件，找到对应数据在csv文件中找到对应的列。
-4. 更改`src/csv2rosbag/trans.py`中的相应数据结构与行号
-5. 运行`src/csv2rosbag/trans.py`，将会在`src/repackage_rosbag`目录下生成储存序列化proto数据的rosbag文件。
+4. 更改`src/csv2rosbag/scritps/trans.py`中的相应数据结构与行号
+5. 运行`src/csv2rosbag/scritps/trans.py`，将会在`src/csv2rosbag/repackage_rosbag`目录下生成储存序列化proto数据的rosbag文件。
 
 
 
