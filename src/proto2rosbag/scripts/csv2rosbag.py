@@ -9,10 +9,6 @@ import Location_pb2
 
 from numpy import double
 
-# set the rate of the publisher is 100Hz
-rate = 100
-period = rospy.Duration(1.0 / rate)
-
 # initialize a node
 rospy.init_node('proto2rosbag', anonymous=True)
 
@@ -57,15 +53,13 @@ with open('/home/ogier/Documents/prototxt2rosbag/zadao_down_output.csv', 'r') as
         msg = String()  # create a message
         msg.data = string_data  # assign the string to the message
         # print(string_data)
-        # print(msg.data)
+        print(msg.data)
         # print(msg)
-        now = rospy.Time.now()
         timestamp_secs = int(row[0][:10])
         timestamp_nsecs = int(row[0][10:])
         ros_time_stamp = rospy.Time(timestamp_secs, timestamp_nsecs)
         bag.write('/Location', msg, ros_time_stamp)
-        rospy.sleep(period)
-    bag.flush()
+    bag.flush()  # flush the bag file
     bag.close()
 print('Successfully converted format!')
 
