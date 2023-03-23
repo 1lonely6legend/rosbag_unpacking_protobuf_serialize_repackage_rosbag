@@ -12,7 +12,7 @@ rate = 100
 period = rospy.Duration(1.0 / rate)
 
 # initialize a node
-rospy.init_node('proto2rosbag', anonymous=True)
+rospy.init_node('csv2rosbag', anonymous=True)
 
 # open a bag file
 bag = rosbag.Bag('Location_proto_strings.bag', 'w')
