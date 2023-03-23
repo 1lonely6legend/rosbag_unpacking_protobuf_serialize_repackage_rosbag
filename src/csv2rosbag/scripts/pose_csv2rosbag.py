@@ -5,51 +5,50 @@ import rospy
 import rosbag
 from std_msgs.msg import String
 import csv
-from ...src import
-
 from numpy import double
 
-# initialize a node
-rospy.init_node('proto2rosbag', anonymous=True)
+from ..include.pose import pose_pb2
 
 # open a bag file
 start_time = rospy.Time.now()
-bag = rosbag.Bag('../Location_proto_strings.bag', 'w')
 
-with open('/home/ogier/Documents/prototxt2rosbag/zadao_down_output.csv', 'r') as f:
+bag = rosbag.Bag('../repackage_rosbag/output_rosbag_FILENAME.rosbag', 'w')
+
+with open('../raw_rosbag/zadao_down_output.bag', 'r') as f:
     reader = csv.reader(f)  # read the csv file
     next(reader)  # skip the first line
     for row in reader:
-        Location = Location_pb2.Location()
-        Location.position.longitude = double(row[4])
-        Location.position.latitude = double(row[5])
-        Location.position.height = double(row[6])
-        Location.pitch = double(row[7])
-        Location.roll = double(row[8])
-        Location.heading = double(row[9])
-        # Location.linear_velocity.x = row[10]
-        # Location.linear_velocity.y = row[11]
-        # Location.linear_velocity.z = row[12]
-        # Location.linear_accerlation.x = row[13]
-        # Location.linear_accerlation.y = row[14]
-        # Location.linear_accerlation.z = row[15]
-        # Location.angular_velocity.x = row[16]
-        # Location.angular_velocity.y = row[17]
-        # Location.angular_velocity.z = row[18]
-        # Location.rtk_flag = row[19]
-        # Location.odom_type = row[20]
-        # Location.auxiliary_type = row[21]
-        # Location.location_valid_flag = row[22]
-        # Location.origin_lat = row[23]
-        # Location.origin_lon = row[24]
-        # Location.utm_poisiton.x = row[25]
-        # Location.utm_poisiton.y = row[26]
-        # Location.utm_poisiton.z = row[27]
-        # Location.change_origin_flag = row[28]
+        Pose = pose_pb2.Pose()  # create a Pose message
+        Pose.position.x = double(row[25])
+        Pose.position.y = double(row[26])
+        Pose.position.z = double(row[27])
+        Pose.orientation.qx = double(row[])
+        Pose.orientation.qy = double(row[])
+        Pose.orientation.qz = double(row[])
+        Pose.orientation.qw = double(row[])
+        Pose.linear_velocity.x = double(row[10])
+        Pose.linear_velocity.y = double(row[11])
+        Pose.linear_velocity.z = double(row[12])
+        Pose.linear_accerlation.x = double(row[13])
+        Pose.linear_accerlation.y = double(row[14])
+        Pose.linear_accerlation.z = double(row[15])
+        Pose.angular_velocity.x = double(row[16])
+        Pose.angular_velocity.y = double(row[17])
+        Pose.angular_velocity.z = double(row[18])
+        Pose.heading = double(row[9])
+        Pose.linear_accerlation_vrf.x = double(row[])
+        Pose.linear_accerlation_vrf.y = double(row[])
+        Pose.linear_accerlation_vrf.z = double(row[])
+        Pose.angular_velocity_vrf.x = double(row[])
+        Pose.angular_velocity_vrf.y = double(row[])
+        Pose.angular_velocity_vrf.z = double(row[])
+        Pose.euler_angles.x = double(row[])
+        Pose.euler_angles.y = double(row[])
+        Pose.euler_angles.z = double(row[])
 
-        serialized_Location = Location.SerializeToString()  # serialize the message
+        serialized_Pose = Pose.SerializeToString()  # serialize the message
         # convert the serialized message to string
-        string_data = str(serialized_Location)
+        string_data = str(serialized_Pose)
         msg = String()  # create a message
         msg.data = string_data  # assign the string to the message
         # print(string_data)
@@ -58,7 +57,7 @@ with open('/home/ogier/Documents/prototxt2rosbag/zadao_down_output.csv', 'r') as
         timestamp_secs = int(row[0][:10])
         timestamp_nsecs = int(row[0][10:])
         ros_time_stamp = rospy.Time(timestamp_secs, timestamp_nsecs)
-        bag.write('/Location', msg, ros_time_stamp)
+        bag.write('/apollo/localization/pose', msg, ros_time_stamp)
     bag.flush()  # flush the bag file
     bag.close()
-print('Successfully converted format!')
+print('Successfully!')

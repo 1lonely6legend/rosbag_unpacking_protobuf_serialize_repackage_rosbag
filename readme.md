@@ -31,9 +31,15 @@ Unpack the ROSBAG package, serialize the data in it using protobuf, and then rep
     rosbag info <BAGFILE>
     ```
    如需要转换多条topic，需要多次运行上述命令。
-3. 人工查看proto文件，找到对应数据在csv文件中找到对应的列。
-4. 更改`src/csv2rosbag/scritps/trans.py`中的相应数据结构与行号
-5. 运行`src/csv2rosbag/scritps/trans.py`，将会在`src/csv2rosbag/repackage_rosbag`目录下生成储存序列化proto数据的rosbag文件。
+3. 将需要转为的proto文件放在`src/csv2rosbag/proto`目录下，运行
+    ```bash
+    protoc -I=. ./FILEname.proto --python_out=../../include
+    ```
+   将会在`src/csv2rosbag/include`目录下生成对应的py文件。
+4. 人工查看proto文件，找到对应数据在csv文件中找到对应的列。
+5. 更改`src/csv2rosbag/scritps/trans.py`中的import语句，将对应的proto文件导入
+6. 更改`src/csv2rosbag/scritps/trans.py`中的相应数据结构与行号
+7. 运行`src/csv2rosbag/scritps/trans.py`，将会在`src/csv2rosbag/repackage_rosbag`目录下生成储存序列化proto数据的rosbag文件。
 
 
 
