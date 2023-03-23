@@ -9,5 +9,9 @@ gen
 devel
 build
 .vscode
-.catkin_workspace
-./src/proto2rosbag/scripts/__pycache__
+src/csv/
+src/msg/
+src/proto/
+src/raw_rosbag/
+src/rosbag/
+src/trans_proto/
