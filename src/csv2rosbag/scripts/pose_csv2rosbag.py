@@ -10,8 +10,6 @@ from numpy import double
 from ..include.pose import pose_pb2
 
 # open a bag file
-start_time = rospy.Time.now()
-
 bag = rosbag.Bag('../repackage_rosbag/output_rosbag_FILENAME.rosbag', 'w')
 
 with open('../raw_rosbag/zadao_down_output.bag', 'r') as f:
