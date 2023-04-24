@@ -34,11 +34,11 @@ syntax = "proto3";
 
 package apollo.localization;
 
-import "apollo_msgs/proto/common/header.proto";
-import "apollo_msgs/proto/localization/pose.proto";
-import "apollo_msgs/proto/common/geometry.proto";
-import "apollo_msgs/proto/common/pnc_point.proto";
-import "apollo_msgs/proto/localization/localization_status.proto";
+import "header.proto";
+import "pose.proto";
+import "geometry.proto";
+import "pnc_point.proto";
+import "localization_status.proto";
 
 message Uncertainty {
   // Standard deviation of position, east/north/up in meters.

@@ -34,7 +34,7 @@ syntax = "proto3";
 
 package apollo.localization;
 
-import "apollo_msgs/proto/common/geometry.proto";
+import "geometry.proto";
 
 message Pose {
   // Position of the vehicle reference point (VRP) in the map reference frame.

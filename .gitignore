@@ -11,7 +11,6 @@ build
 .vscode
 src/csv/
 src/csv2rosbag/msg/
-src/csv2rosbag/proto/
-src/csv2rosbag/raw_rosbag/
 src/rosbag/trans_proto/
-src/csv2rosbag/include/
+2023-04-21-19-14-25.bag
+src/csv2rosbag/raw_rosbag/zadao_down_output.bag

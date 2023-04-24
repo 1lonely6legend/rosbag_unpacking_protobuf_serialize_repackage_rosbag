@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package apollo.common;
 
-import "apollo_msgs/proto/common/error_code.proto";
+import "error_code.proto";
 
 message Header {
   // Message publishing time in seconds.
