@@ -2,19 +2,29 @@
 import rospy
 # 导入mgs到pkg中
 from std_msgs.msg import String
-from localization_pb2 import LocalizationEstimate, LocalizationStatus, Uncertainty
-from google.protobuf.descriptor_pool import DescriptorPool
+from localization_pb2 import LocalizationEstimate, LocalizationStatus, Uncertainty, _b
+import pickle
 
 import base64
-
-descriptor_pool = DescriptorPool()
 
 
 # 回调函数输入的应该是msg
 def callback(message):
-    #print(message.data)
-    message.data.debugstring()
-    print(message)
+    try:
+        locationestimate = LocalizationEstimate()
+        locationestimate.ParseFromString(base64.decode(message.data))
+        print(locationestimate)
+    except Exception as e:
+        print('Error occurred: ', e)
+# try:
+#     serialized_data = message.data.SerializeToString()
+#     print(serialized_data)
+# except Exception as e:
+#     print('Error occurred: ', e)
+
+# print(bdata)
+# with open('serialized_data', 'wb') as f:
+#     pickle.dump(bdata, f)
 
 def listener():
     rospy.init_node('pylistener', anonymous=True)
